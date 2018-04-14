@@ -1,24 +1,34 @@
+html,
 body {
-  background-color: #fbc547;
-  color: #333;
-  font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir",
-    "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans",
-    "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu",
-    "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
-  padding: 18vh 1rem;
-  text-align: center;
+  background-color: #fff;
+  height: 100%;
 }
 
-a {
-  color: rgba(#000, 0.7);
+h1, h2, h3, h4, p {
+  font-family: 'Montserrat' !important;
+}
 
-  &:focus,
-  &:hover {
-    color: rgba(#000, 0.6);
+p {
+  color: #545454
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .compact {
+    padding-left: 10em;
+    padding-right: 10em;
   }
 }
 
-.middleman-logo {
-  margin-bottom: 1rem;
-  width: 10rem;
+@media (min-width: 992px) {
+  .compact {
+    padding-left: 15em;
+    padding-right: 15em;
+  }
+}
+
+@media (max-width: 576px) {
+  .compact {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
 }
