@@ -1,3 +1,12 @@
+$black: #545454;
+$dark-green: #26866e;
+$light-green: #e0ebe8;
+$medium-green: #45b29a;
+$light-medium-green: #61bba7;
+$light-intense-green: #48b39b;
+$gray: #f3f2f1;
+$white: #fff;
+
 html,
 body {
   background-color: #fff;
@@ -9,13 +18,88 @@ h1, h2, h3, h4, p {
 }
 
 p {
-  color: #545454
+  color: $black
+}
+
+.gaegu {
+  font-family: 'Gaegu' !important;
+}
+
+.light-intense-green {
+  color: $light-intense-green;
+}
+
+.light-medium-green {
+  color: $light-medium-green;
+}
+
+.medium-green {
+  color: $medium-green !important;
+}
+
+.dark-green {
+  color: $dark-green !important;
+}
+
+.gray {
+  color: $gray;
+}
+
+.white {
+  color: $white;
+}
+
+.bg-light-green {
+  background-color: $light-green;
+}
+
+.h-60 {
+  height: 60%;
+}
+
+.h-80 {
+  height: 80%;
+}
+
+.no-border {
+  border: none !important;
+}
+
+.pv-2 {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+
+@media (max-width: 576px) {
+  .compact {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  .nav-top {
+    padding-top: 8% !important;
+  }
+
+  .pv-1 {
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+
+  .top-padding {
+    padding-top: 1em;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 992px) {
   .compact {
-    padding-left: 10em;
-    padding-right: 10em;
+    padding-left: 8em;
+    padding-right: 8em;
+  }
+  .nav-top {
+    padding-top: 8% !important;
+  }
+  .top-padding {
+    padding-top: 3em;
   }
 }
 
@@ -24,11 +108,21 @@ p {
     padding-left: 15em;
     padding-right: 15em;
   }
+  .nav-top {
+    padding-top: 3% !important;
+  }
+  .nav-horizontal {
+    padding-left: 10% !important;
+    padding-right: 10% !important;
+  }
+  .top-padding {
+    padding-top: 3em;
+  }
 }
 
-@media (max-width: 576px) {
+@media (min-width: 1440px) {
   .compact {
-    padding-left: 1em;
-    padding-right: 1em;
+    padding-left: 20em;
+    padding-right: 20em;
   }
 }
