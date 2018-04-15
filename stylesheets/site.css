@@ -1,0 +1,90 @@
+html,
+body {
+  background-color: #fff;
+  height: 100%; }
+
+h1, h2, h3, h4, p {
+  font-family: 'Montserrat' !important; }
+
+p {
+  color: #545454; }
+
+.gaegu {
+  font-family: 'Gaegu' !important; }
+
+.light-intense-green {
+  color: #48b39b; }
+
+.light-medium-green {
+  color: #61bba7; }
+
+.medium-green {
+  color: #45b29a !important; }
+
+.dark-green {
+  color: #26866e !important; }
+
+.gray {
+  color: #f3f2f1; }
+
+.white {
+  color: #fff; }
+
+.bg-light-green {
+  background-color: #e0ebe8; }
+
+.h-60 {
+  height: 60%; }
+
+.h-80 {
+  height: 80%; }
+
+.no-border {
+  border: none !important; }
+
+.pv-2 {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em; }
+
+@media (max-width: 576px) {
+  .compact {
+    padding-left: 1em;
+    padding-right: 1em; }
+
+  .nav-top {
+    padding-top: 8% !important; }
+
+  .pv-1 {
+    padding-top: 1em;
+    padding-bottom: 1em; }
+
+  .top-padding {
+    padding-top: 1em; } }
+@media (min-width: 576px) and (max-width: 992px) {
+  .compact {
+    padding-left: 8em;
+    padding-right: 8em; }
+
+  .nav-top {
+    padding-top: 8% !important; }
+
+  .top-padding {
+    padding-top: 3em; } }
+@media (min-width: 992px) {
+  .compact {
+    padding-left: 15em;
+    padding-right: 15em; }
+
+  .nav-top {
+    padding-top: 3% !important; }
+
+  .nav-horizontal {
+    padding-left: 10% !important;
+    padding-right: 10% !important; }
+
+  .top-padding {
+    padding-top: 3em; } }
+@media (min-width: 1440px) {
+  .compact {
+    padding-left: 20em;
+    padding-right: 20em; } }
