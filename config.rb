@@ -1,6 +1,9 @@
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
+set :relative_links, true
+activate :directory_indexes
+
 activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
 end
@@ -50,3 +53,14 @@ activate :deploy do |deploy|
   deploy.branch = 'master'
   deploy.build_before = true
 end
+
+activate :blog do |blog|
+  blog.permalink = '{title}.html'
+  blog.sources = 'blog/{year}-{month}-{day}-{title}.html'
+  blog.layout = 'post'
+  # blog.prefix = "blog"
+  # blog.tag_template = "tag.html"
+  # blog.calendar_template = "calendar.html"
+end
+
+page "/feed.xml", layout: false

@@ -5,3 +5,6 @@ Running Middleman Server
 
 Deploy to Github Pages
 * `bundle exec middleman deploy`
+
+Generating an article
+* `middleman article "title"`

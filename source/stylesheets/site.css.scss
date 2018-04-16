@@ -13,7 +13,7 @@ body {
   height: 100%;
 }
 
-h1, h2, h3, h4, p {
+h1, h2, h3, h4, p, span, a {
   font-family: 'Montserrat' !important;
 }
 
@@ -88,6 +88,10 @@ p {
   .top-padding {
     padding-top: 1em;
   }
+  .compact-blog {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 992px) {
@@ -100,6 +104,10 @@ p {
   }
   .top-padding {
     padding-top: 3em;
+  }
+  .compact-blog {
+    padding-left: 10em;
+    padding-right: 10em;
   }
 }
 
@@ -118,11 +126,21 @@ p {
   .top-padding {
     padding-top: 3em;
   }
+  .compact-blog {
+    padding-left: 18em;
+    padding-right: 18em;
+    padding-top: 2em;
+  }
 }
 
 @media (min-width: 1440px) {
   .compact {
     padding-left: 20em;
     padding-right: 20em;
+  }
+  .compact-blog {
+    padding-left: 25em;
+    padding-right: 25em;
+    padding-top: 3em;
   }
 }

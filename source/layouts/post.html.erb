@@ -25,7 +25,27 @@
 
   </head>
   <body>
-    <%= yield %>
+
+  <section class="compact bg-light-green">
+    <%= partial "partials/navbar" %>
+  </section>
+  
+    <section class="compact-blog pv-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="light-intense-green" >
+              <%= current_article.title %>
+            </h2>
+            <span><%= current_article.date.strftime('%b %e') %></span>
+
+            <div class="pt-3">
+              <%= current_article.body %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <%= partial "partials/footer" %>
     <!-- Optional JavaScript -->
