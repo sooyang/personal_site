@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Integrating Shopee into Ruby on Rails app - Part 1</title>
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/site.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-93697526-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-93697526-1');
+    </script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- FontAwesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+
+  <section class="compact bg-light-green">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light-green nav-top nav-horizontal">
+  <a class="navbar-brand gaegu medium-green" href="/">SY</a>
+  <button class="navbar-toggler no-border" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-bars medium-green"></i>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto">
+      <a class="nav-item nav-link dark-green" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link dark-green" href="/blog/">Blog</a>
+    </div>
+  </div>
+</nav>
+
+  </section>
+  
+    <section class="compact-blog pv-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="light-intense-green" >
+              Integrating Shopee into Ruby on Rails app - Part 1
+            </h2>
+            <span>Apr 16</span>
+
+            <div class="pt-3">
+              <p>Hello! In this article, we will be looking at the basic part of integrating Shopee - The leading online shopping platform in Southeast Asia and Taiwan into our Ruby on Rails app.</p>
+
+<p>I will be demonstrating on making a simple successful request to one of Shopee's endpoint. I will be using <code>shopee.shop.GetShopInfo</code> endpoint to get the registered shop info. Shopee will provide the following information (below) to merchants. These information is required in order to make a request to Shopee API.</p>
+
+<ul>
+  <li>Partner ID</li>
+  <li>Shop ID</li>
+  <li>Secret Key</li>
+</ul>
+
+<h4 id="checkpoints-when-making-a-request">Checkpoints when making a request</h4>
+<ul>
+  <li>Ensure that <code>POST</code> method is being at all times. Shopee specified that all API's should use <code>POST</code>.</li>
+  <li>Ensure Content Type is being set to <code>application/json</code> in the HTTP Header</li>
+  <li>Ensure the HTTP Body contains the following at all times.
+    <ul>
+      <li>partner_id</li>
+      <li>shopid</li>
+      <li>timestamp</li>
+    </ul>
+  </li>
+  <li>The HTTP Body should look something like <code>{"partner_id": 123456, "shopid": 123456, "timestamp": 1523865691}</code></li>
+</ul>
+
+<h4 id="authenticating-a-request">Authenticating a Request</h4>
+<p>Having those in place, we are read to authenticate the request. The main part of successfully authenticating a request to Shopee is to generate an auth signature correctly. The signature is calculated by passing the signature base string and signing key to the HMAC-SHA256 hashing algorithm.</p>
+
+<ul>
+  <li>
+    <p>Signature Base String
+ We first need to get the signature base string by concatenating the url and the data.</p>
+
+    <pre><code> BASE_URL = "https://partner.shopeemobile.com/api/v1"
+ API = /shop/get
+ DATA = {"partner_id": "PARTNER_ID_PROVIDED_BY_SHOPEE_IN_INTEGER", "shopid": "SHOP_ID_PROVIDED_BY_SHOPEE_IN_INTEGER", "timestamp": DateTime.now.to_i}.to_json
+ signature_base_url = BASE_URI + API + "|" +  DATA
+</code></pre>
+  </li>
+  <li>
+    <p>Generating Auth Signature
+ Once the Signature Base String is obtained, we can simply generate the auth signature by simply passing the <code>Secret Key</code> provided by Shopee and the Signature Base String to the hashing algorithm.</p>
+
+    <pre><code> auth_signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), "SECRET KEY PROVIDED BY SHOPEE", signature_base_url)
+</code></pre>
+  </li>
+</ul>
+
+<h3 id="making-the-api-call">Making the API Call</h3>
+<p>Putting it all together, simple use <code>HTTParty</code> to make a post request and pass in the necessary headers.</p>
+
+<pre><code>    HTTParty.post(
+      BASE_URI + API,
+      :headers =&gt; {
+        'Content-Type' =&gt; 'application/json',
+        'Accept' =&gt; 'application/json',
+        "Authorization": auth_signature
+        }, :body =&gt; DATA)
+</code></pre>
+
+<p>Congrats! You can now use any Shopee API. Just simply pass in any additional parameters to the body as required by the respective API and you are good to go!</p>
+
+<p>Happy Coding!</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-light-green">
+  <div class="container text-center">
+      <div class="row align-items-center">
+        <div class="col-12 mt-4 mb-3">
+          <div class="d-inline-block mr-1">
+            <a href="https://github.com/sooyang" class="social-icon-jump-x4 circle" target="_blank">
+              <div>
+                <i class="fab fa-github-alt fa-2x light-intense-green"></i>
+              </div>
+            </a>
+          </div>
+          <div class="d-inline-block ml-1">
+            <a href="https://my.linkedin.com/in/sooyangtan" class="social-icon-jump-x4 circle" target="_blank">
+              <div>
+                <i class="fab fa-linkedin-in fa-2x light-intense-green"></i>
+              </div>
+            </a>
+          </div>
+          <p class="mt-1">2018 &copy; SOO YANG, TAN</p>
+        </div>
+      </div>
+  </div>
+</footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  </body>
+</html>
